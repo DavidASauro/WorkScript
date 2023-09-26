@@ -60,10 +60,15 @@ if response.status_code == 200:
 
         df[1] = df[1].fillna('') + '    ' + rink1
         df[6] = df[6].fillna('') + ' ' +rink2
+        
+        print(df)
 
         stacked_df = pd.concat ([df[1], df[6]])
-        stacked_df = stacked_df[stacked_df.str.match(r'^\d{2}:\d{2} .+$')]
+        
+        #stacked_df = stacked_df[stacked_df.str.match(r'^\d{2}:\d{2} .+$')]
+        
         stacked_df = stacked_df.str.split(' ', n=1, expand=True)
+       
         stacked_df.columns = ['Time', 'Rink']
         stacked_df['Time'] = pd.to_datetime(stacked_df['Time'], format='%H:%M', errors='coerce')
         stacked_df['Time'] = stacked_df['Time'].dt.strftime('%H:%M')
@@ -72,7 +77,8 @@ if response.status_code == 200:
 
         print(stacked_df)
 
-
+        
+        
         # Your email configuration
         sender_email = 'DavidSau43@Gmail.com'
         sender_password = 'shhk hlcn vgwk yhze'
@@ -107,7 +113,7 @@ if response.status_code == 200:
 
         # Close the server connection
         server.quit()
-
+        
 
 
 
